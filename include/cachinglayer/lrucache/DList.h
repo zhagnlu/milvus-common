@@ -50,7 +50,7 @@ class DList {
             event_base_->loopForever();
         });
 
-        eviction_thread_ = std::thread(&DList::evictionLoop, this);
+        //eviction_thread_ = std::thread(&DList::evictionLoop, this);
     }
 
     ~DList() {
