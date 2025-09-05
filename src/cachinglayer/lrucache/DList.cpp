@@ -224,7 +224,7 @@ DList::chainString() const {
     ss << "[MCL] DList chain: ";
     size_t num_nodes = 0;
     for (auto it = tail_; it != nullptr; it = it->next_) {
-        ss << "(" << it->key() << ", " << it->loaded_size().ToString() << ", pins=" << it->pin_count_ << ")";
+        //ss << "(" << it->key() << ", " << it->loaded_size().ToString() << ", pins=" << it->pin_count_ << ")";
         num_nodes++;
         if (it->next_ != nullptr) {
             ss << " -> ";

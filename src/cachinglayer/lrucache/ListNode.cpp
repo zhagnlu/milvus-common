@@ -90,11 +90,11 @@ ListNode::manual_evict() {
         }
         case State::LOADED: {
             if (pin_count_.load() > 0) {
-                LOG_ERROR(
-                    "[MCL] manual_evict() called on a LOADED and pinned cell "
-                    "{}, "
-                    "aborting eviction.",
-                    key());
+               // LOG_ERROR(
+               //     "[MCL] manual_evict() called on a LOADED and pinned cell "
+               //     "{}, "
+               //     "aborting eviction.",
+               //     key());
                 return false;
             }
             auto saved_loaded_size = loaded_size_;
@@ -103,7 +103,7 @@ ListNode::manual_evict() {
             return true;
         }
         case State::LOADING: {
-            LOG_ERROR("[MCL] manual_evict() called on a {} cell {}", state_to_string(state_), key());
+            //LOG_ERROR("[MCL] manual_evict() called on a {} cell {}", state_to_string(state_), key());
             return false;
         }
         default: {
@@ -239,7 +239,7 @@ ListNode::touch_to_dlist(bool update_evictable_memory) {
 void
 ListNode::unload() {
     clear_data();
-    LOG_TRACE("[MCL] ListNode unloaded: key={}, size={}", key(), loaded_size_.ToString());
+    //LOG_TRACE("[MCL] ListNode unloaded: key={}, size={}", key(), loaded_size_.ToString());
     loaded_size_ = {0, 0};       // reset loaded_size_ to 0,0 to avoid double refund from dlist_
     state_ = State::NOT_LOADED;  // reset state_ to NOT_LOADED to avoid double refund from dlist_
 }

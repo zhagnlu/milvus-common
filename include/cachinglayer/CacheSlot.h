@@ -287,14 +287,14 @@ class CacheSlot final : public std::enable_shared_from_this<CacheSlot<CellT>> {
             // defer release resource_needed_for_loading
             auto defer_release = folly::makeGuard(
                 [this, resource_needed_for_loading]() { dlist_->ReleaseLoadingResource(resource_needed_for_loading); });
-            LOG_TRACE(
-                "[MCL] CacheSlot reserveLoadingResourceWithTimeout {} sec "
-                "result: {} time: {} sec, resource_needed: {}, key: {}",
-                timeout.count() / 1000.0, reservation_success ? "success" : "failed",
-                std::chrono::duration_cast<std::chrono::milliseconds>(std::chrono::steady_clock::now() - start)
-                        .count() *
-                    1.0 / 1000,
-                resource_needed_for_loading.ToString(), translator_->key());
+           // LOG_TRACE(
+           //     "[MCL] CacheSlot reserveLoadingResourceWithTimeout {} sec "
+           //     "result: {} time: {} sec, resource_needed: {}, key: {}",
+           //     timeout.count() / 1000.0, reservation_success ? "success" : "failed",
+           //     std::chrono::duration_cast<std::chrono::milliseconds>(std::chrono::steady_clock::now() - start)
+           //             .count() *
+           //         1.0 / 1000,
+           //     resource_needed_for_loading.ToString(), translator_->key());
 
             run_load_internal();
         } catch (...) {
@@ -317,7 +317,7 @@ class CacheSlot final : public std::enable_shared_from_this<CacheSlot<CellT>> {
 
         ~CacheCell() override {
             if (state_ == State::LOADING) {
-                LOG_ERROR("[MCL] CacheSlot Cell {} destroyed while loading", key());
+                //LOG_ERROR("[MCL] CacheSlot Cell {} destroyed while loading", key());
             }
             clear_data();
         }
@@ -375,7 +375,8 @@ class CacheSlot final : public std::enable_shared_from_this<CacheSlot<CellT>> {
 
         std::string
         key() const override {
-            return fmt::format("{}:{}", slot_->translator_->key(), cid_);
+            return "";
+            //return fmt::format("{}:{}", slot_->translator_->key(), cid_);
         }
 
      private:
